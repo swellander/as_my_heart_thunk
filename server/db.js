@@ -2,7 +2,8 @@ const Sequelize = require('sequelize');
 const faker = require('faker');
 const conn = new Sequelize(
   process.env.DATABASE_URL ||
-  'postgres://localhost/junk'
+  'postgres://localhost/junk',
+  { logging: false }
 );
 
 const Product = conn.define('product', {
@@ -17,14 +18,14 @@ const Product = conn.define('product', {
 const syncSeed = () => {
   return conn.sync({ force: true })
     .then(() => Promise.all([
+      Product.create({ name: faker.commerce.productName() }),
+      Product.create({ name: faker.commerce.productName() }),
       Product.create({ name: faker.commerce.productName() })
     ]))
     .catch(err => console.log(err))
 };
 
 module.exports = {
-  models: {
-    Product
-  },
+  Product,
   syncSeed
 }

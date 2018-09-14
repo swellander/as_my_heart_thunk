@@ -5,12 +5,15 @@
   "author": "<samwellander@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "dev": "nodemon server"
+    "dev": "yarn webpack -w & nodemon server",
+    "build": "webpack"
   },
   "dependencies": {
     "express": "^4.16.3",
     "faker": "^4.1.0",
     "pg": "^7.4.3",
-    "sequelize": "^4.38.1"
+    "sequelize": "^4.38.1",
+    "webpack": "^4.19.0",
+    "webpack-cli": "^3.1.0"
   }
 }
