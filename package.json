@@ -1,0 +1,16 @@
+{
+  "name": "junk_in_the_thunk",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "<samwellander@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "dev": "nodemon server"
+  },
+  "dependencies": {
+    "express": "^4.16.3",
+    "faker": "^4.1.0",
+    "pg": "^7.4.3",
+    "sequelize": "^4.38.1"
+  }
+}
