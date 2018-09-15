@@ -1,13 +1,13 @@
-import React, { Component } from 'react';
-import store, { getProducts } from '../store';
+import React, { Component, Fragment } from 'react';
+import store, { loadProducts } from '../store';
 import { connect } from 'react-redux';
-import Product from './Product';
-import uuid from 'uuid';
+import Header from './Header';
+import Body from './Body';
 
 
 class Main extends Component {
   componentDidMount() {
-    store.dispatch(getProducts())
+    store.dispatch(loadProducts())
   }
 
   static defaultProps = {
@@ -16,11 +16,10 @@ class Main extends Component {
 
   render = () => {
     return (
-      <div>
-        {this.props.products.map(product => (
-          <Product key={product.id} product={product} />
-        ))}
-      </div>
+      <Fragment>
+        <Header />
+        <Body />
+      </Fragment>
     )
   }
 }

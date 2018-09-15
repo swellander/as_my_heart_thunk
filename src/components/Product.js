@@ -4,11 +4,10 @@ import { deleteProduct } from '../store';
 
 class Product extends Component {
   render = () => {
-    console.log(this.props)
-    const { name, id } = this.props.product;
+    const { name, id, rating } = this.props.product;
     return (
-      <div>
-        <h3>{name}</h3>
+      <div style={{ display: 'flex' }}>
+        <h3>{rating} | {name}</h3>
         <button onClick={() => this.props.deleteProduct(id)}>Delete</button>
       </div>
     )

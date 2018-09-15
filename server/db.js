@@ -6,6 +6,11 @@ const conn = new Sequelize(
   { logging: false }
 );
 
+//helper function
+const getRandomRating = () => {
+  return Math.ceil(Math.random() * 10);
+}
+
 const Product = conn.define('product', {
   name: {
     type: Sequelize.STRING,
@@ -18,9 +23,9 @@ const Product = conn.define('product', {
 const syncSeed = () => {
   return conn.sync({ force: true })
     .then(() => Promise.all([
-      Product.create({ name: faker.commerce.productName() }),
-      Product.create({ name: faker.commerce.productName() }),
-      Product.create({ name: faker.commerce.productName() })
+      Product.create({ name: faker.commerce.productName(), rating: getRandomRating() }),
+      Product.create({ name: faker.commerce.productName(), rating: getRandomRating() }),
+      Product.create({ name: faker.commerce.productName(), rating: getRandomRating() }),
     ]))
     .catch(err => console.log(err))
 };
