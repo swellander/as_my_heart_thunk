@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import store, { getProducts } from '../store';
 import { connect } from 'react-redux';
+import Product from './Product';
 import uuid from 'uuid';
+
 
 class Main extends Component {
   componentDidMount() {
@@ -16,7 +18,7 @@ class Main extends Component {
     return (
       <div>
         {this.props.products.map(product => (
-          <h3 key={uuid()}>{product.name}</h3>
+          <Product key={product.id} product={product} />
         ))}
       </div>
     )

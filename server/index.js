@@ -6,10 +6,16 @@ const db = require('./db');
 app.use(express.static('dist'))
 app.use(express.static('public'))
 
-app.get('/api/all', (req, res, next) => {
+app.get('/api/products', (req, res, next) => {
   db.Product.findAll()
     .then(products => res.json(products));
 });
+
+app.delete('/api/products/:id', (req, res, next) => {
+  db.Product.findById(req.params.id)
+    .then(product => product.destroy())
+    .then(() => res.sendStatus(202))
+})
 
 const init = () => (
   db.syncSeed()
