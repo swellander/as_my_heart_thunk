@@ -6,7 +6,7 @@ const db = require('./db');
 app.use(express.static('dist'))
 app.use(express.static('public'))
 
-app.get('/', (req, res, next) => {
+app.get('/api/all', (req, res, next) => {
   db.Product.findAll()
     .then(products => res.json(products));
 });
