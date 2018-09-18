@@ -5,7 +5,8 @@
   "author": "<samwellander@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "start": "yarn webpack -w & nodemon server --ignore src/",
+    "postinstall": "yarn webpack",
+    "start": "yarn webpack -w & node server",
     "build": "webpack"
   },
   "dependencies": {
