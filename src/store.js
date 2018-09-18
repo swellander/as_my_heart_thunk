@@ -39,7 +39,10 @@ export const loadProducts = () => {
   return (dispatch) => {
     axios.get('/api/products')
       .then(response => response.data)
-      .then(products => dispatch(_loadProducts(products)))
+      .then(products => {
+        dispatch(_loadProducts(products))
+      })
+      .catch(err => console.log(err));
   }
 }
 
@@ -68,14 +71,12 @@ export const deleteProduct = id => (
 
 //QUESTION: why does the products array re-order itself when a new product is created?
 
-const productsReducer = (state = {}, action) => {
+const productsReducer = (state = { products: [] }, action) => {
   switch (action.type) {
     case LOAD_PRODUCTS:
       return { ...state, products: action.products };
     case CREATE_PRODUCT:
-      console.log(state.products);
       const newState = { ...state, products: [...state.products, action.product] } //it's this line here
-      console.log(state.products);
       return newState;
     case DELETE_PRODUCT:
       return { ...state, products: state.products.filter(product => product.id !== action.id) }

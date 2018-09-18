@@ -1,19 +1,15 @@
 import React, { Component, Fragment } from 'react';
-import store, { loadProducts } from '../store';
+import { loadProducts } from '../store';
 import { connect } from 'react-redux';
 import Header from './Header';
 import Body from './Body';
 
 
 class Main extends Component {
+
   componentDidMount() {
-    store.dispatch(loadProducts())
+    this.props.initProducts();
   }
-
-  static defaultProps = {
-    products: []
-  }
-
   render = () => {
     return (
       <Fragment>
@@ -24,8 +20,8 @@ class Main extends Component {
   }
 }
 
-const mapStateToProps = state => {
-  return { ...state }
-}
+const dispatchStateToProps = dispatch => ({
+  initProducts: () => dispatch(loadProducts())
+})
 
-export default connect(mapStateToProps)(Main);
+export default connect(null, dispatchStateToProps)(Main);

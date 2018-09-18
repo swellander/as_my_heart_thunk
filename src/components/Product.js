@@ -6,7 +6,7 @@ class Product extends Component {
   render = () => {
     const { name, id, rating } = this.props.product;
     return (
-      <div style={{ display: 'flex' }}>
+      <div >
         <h3>{rating} | {name}</h3>
         <button onClick={() => this.props.deleteProduct(id)}>Delete</button>
       </div>

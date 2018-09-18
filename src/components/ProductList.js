@@ -3,10 +3,6 @@ import Product from './Product';
 import { connect } from 'react-redux';
 
 class ProductList extends React.Component {
-  static defaultProps = {
-    products: []
-  }
-
   render = () => (
     <div>
       {this.props.products.map(product => (

@@ -1,23 +1,24 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import faker from 'faker';
+
+const getHighestRated = productArr => (
+  productArr.reduce((highest, curr) => {
+    if (highest.rating > curr.rating) return highest;
+    else return curr;
+  })
+);
 
 class TopProduct extends Component {
   render() {
-    console.log(faker.image.image())
     return (
-      <h1>Top Product: {this.props.topProduct.name}</h1>
+      <h1>Top Product: {this.props.topProduct.name || <em>You</em>}</h1>
     )
   }
 }
 
-const sortByRating = productArr => (
-  productArr.sort((a, b) => b.rating - a.rating)
-)
-
 const mapStateToProps = state => {
   return {
-    topProduct: state.products ? sortByRating(state.products)[0] : {}
+    topProduct: state.products.length > 0 ? getHighestRated(state.products) : {}
   }
 }
 
