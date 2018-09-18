@@ -7,9 +7,6 @@ import faker from 'faker';
 const getRandomRating = () => {
   return Math.ceil(Math.random() * 10);
 }
-const sortByRating = productArr => (
-  productArr.sort((a, b) => b.rating - a.rating)
-)
 
 const LOAD_PRODUCTS = 'LOAD_PRODUCTS';
 const CREATE_PRODUCT = 'CREATE_PRODUCT';
@@ -51,7 +48,6 @@ export const createProduct = () => {
     name: faker.commerce.productName(),
     rating: getRandomRating()
   }
-
   return dispatch => {
     axios.post('api/products', newProduct)
       .then(response => response.data)
@@ -70,13 +66,17 @@ export const deleteProduct = id => (
   }
 )
 
+//QUESTION: why does the products array re-order itself when a new product is created?
+
 const productsReducer = (state = {}, action) => {
   switch (action.type) {
     case LOAD_PRODUCTS:
       return { ...state, products: action.products };
     case CREATE_PRODUCT:
-      const sorted = sortByRating([...state.products, action.product])
-      return { ...state, products: sorted }
+      console.log(state.products);
+      const newState = { ...state, products: [...state.products, action.product] } //it's this line here
+      console.log(state.products);
+      return newState;
     case DELETE_PRODUCT:
       return { ...state, products: state.products.filter(product => product.id !== action.id) }
   }

@@ -13,7 +13,6 @@ app.get('/api/products', (req, res, next) => {
 });
 
 app.post('/api/products', (req, res, next) => {
-  console.log('Woo')
   db.Product.create(req.body)
     .then(product => res.json(product))
     .catch(next)

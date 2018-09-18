@@ -11,9 +11,13 @@ class TopProduct extends Component {
   }
 }
 
+const sortByRating = productArr => (
+  productArr.sort((a, b) => b.rating - a.rating)
+)
+
 const mapStateToProps = state => {
   return {
-    topProduct: state.products ? state.products[0] : {}
+    topProduct: state.products ? sortByRating(state.products)[0] : {}
   }
 }
 
